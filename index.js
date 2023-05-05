@@ -5,6 +5,8 @@ const port = process.env.PORT || 5000
 
 app.use(cors())
 
+app.use(express.json())
+
 const user =[
     {id: 1, name: "Shabana", email: "shabana@gmail.com"},
     {id: 2, name: "Sabila", email: "sabila@gmail.com"},
@@ -18,6 +20,10 @@ app.get('/', (req, res) =>{
 app.post('/users', (req, res) =>{
     console.log("post api hitting");
     console.log(req.body)
+    const newUser = req.body;
+    newUser.id = user.length + 1;
+    user.push(newUser)
+    res.send(newUser)
 })
 
 app.get('/users', (req, res) =>{
